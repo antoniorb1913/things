@@ -1,0 +1,27 @@
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Maven
+backend/target/
+**/target/
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# Node modules (si usas npm)
+node_modules/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+
+# Build outputs
+dist/
+build/
