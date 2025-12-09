@@ -5,18 +5,17 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "8084:80"
-    volumes:
-      - .:/var/www/html
+      - "85:80"
+    depends_on:
+      - api
 
   api:
     build:
       context: backend
       dockerfile: Dockerfile
-    restart: always
     container_name: things
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      - SPRING_PROFILES_ACTIVE= dev
+      - API_BACKEND_URL= http://host.docker.internal:8080/api
     ports:
       - "8083:8080"
-      

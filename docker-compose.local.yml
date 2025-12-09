@@ -1,27 +1,26 @@
 services:
   web:
     build:
-      context: ./frontend
+      context: frontend
       dockerfile: Dockerfile
-    environment:
-      SPRING_PROFILES_ACTIVE: local
-    restart: always
     ports:
-      - "8084:80"
-    volumes:
-      - .:/var/www/html
+      - "80:80"
+    environment:
+      API_BACKEND_URL: http://host.docker.internal:8080/api
     depends_on:
-      - db
+      - db 
 
   db: 
     image: postgres:16
     restart: always
     environment:
       POSTGRES_PASSWORD: root
+      POSTGRES_DB: stranger
+      # POSTGRES_USER: root  # Opcional, si no se especifica usa 'postgres'
     ports:
       - "5433:5432"
     volumes:
-      - ./backend/sql:/docker-entrypoint-initdb.d
+      - ./backend/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres_data:/var/lib/postgresql/data
 
 volumes:
